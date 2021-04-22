@@ -1,0 +1,53 @@
+@import "@forevolve/bootstrap-dark/scss/bootstrap-dark.scss";
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fade-in 1s ease-in 1s once normal forwards;
+}
+
+pre {
+    color:unset;
+}
+
+@include media-breakpoint-up(sm) {  
+    .card-columns {
+        column-count: 2;
+    } 
+}
+@include media-breakpoint-up(md) { 
+    .card-columns {
+        column-count: 3;
+    } 
+}
+@include media-breakpoint-up(lg) { 
+    .card-columns {
+        column-count: 4;
+    } 
+}
+
+.card-tags:not(:hover):not(:focus) {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+}
+
+.card-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
