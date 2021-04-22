@@ -51,3 +51,9 @@ pre {
     text-overflow: ellipsis;
 }
 
+.prompt-link{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}

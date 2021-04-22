@@ -5,59 +5,68 @@
             "title": "Lilimon",
             "description": "This fairy Digimon will sweeten your mood and do whimsical things to you afterwards.",
             "tags": ["digimon"],
-            "relatedPrompts": ["https://prompts.aidg.club/1139"]
+            "relatedPrompts": ["https://prompts.aidg.club/1178"]
         },
         {
             "path": "pironica.png",
             "title": "Pironica",
-            "description": "Unlike Pirone, this funky babe is always cheery and ready to have some fun."
+            "description": "Unlike Pirone, this funky babe is always cheery and ready to have some fun.",
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
             "path": "Demy.png",
             "title": "Demy",
             "tags": ["girlfriend", "mitosis"],
-            "description": "This loving girlfriend with the power of \"mitosis\". Demy can split herself into multiple, identical copies."
+            "description": "This loving girlfriend with the power of \"mitosis\". Demy can split herself into multiple, identical copies.",
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
             "path": "Purple-Heart.png",
             "title": "Purple Heart",
             "tags":["neptunia"],
-            "description": "This goddess is powered up and ready to do what Nintendoesn't."
+            "description": "This goddess is powered up and ready to do what Nintendoesn't.",
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
             "path": "Erika.png",
             "title": "Erika",
-            "description": "This unkempt neighbor girl has a strange obsession with you in particular. Surely she's a normal girl..."
+            "description": "This unkempt neighbor girl has a strange obsession with you in particular. Surely she's a normal girl...",
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
             "path": "Iris.png",
             "title": "Iris",
             "tags": ["vampire"],
-            "description": "Hiding from work and the outdoors, this homebody vampire loves anime, video games and junk food."
+            "description": "Hiding from work and the outdoors, this homebody vampire loves anime, video games and junk food.",
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
             "path": "Octavia.png",
             "title": "Octavia",
             "description": "Don't let this albino rat-girl's appearance fool you, her desires are anything but pure...",
-            "tags": ["monster-girl", "rat-girl"]
+            "tags": ["monster-girl", "rat-girl"],
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
             "path": "Saint-Eileen.png",
             "title": "Saint Eileen",
             "description": "Sadistic healer and source of The Panacea. Eileen will give you succor while she teases your body.",
-            "tags": ["priestess"]
+            "tags": ["priestess"],
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
             "path": "Shadow-Leviathan.png",
             "title": "Shadow Leviathan",
             "description": "This giant, aquatic creature from Planet 4546B is eager to be with you. Can you quench her leviathan-class lust?",
-            "tags": ["monster"]
+            "tags": ["monster"],
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
             "path": "Stella.png",
             "title": "Stella",
             "description": "This living doll will call you \"Master\". Her one wish: your happiness. If only you would tell her your desires...",
-            "tags": ["doll"]
+            "tags": ["doll"],
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
         }
     ]
 }

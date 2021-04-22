@@ -101,6 +101,22 @@ const Home: FunctionComponent<{ search: string }> = (props) => {
 									<Card.Text className="card-description">
 										{character.description}
 									</Card.Text>
+									{/* Not sure if this clutters the front page too much */}
+									{/* {character.relatedPrompts &&
+										character.relatedPrompts.length > 0 && (
+											<div>
+												<strong>Related Prompts</strong>
+												{character.relatedPrompts?.map((link) => (
+													<a
+														className="prompt-link"
+														target="_blank"
+														href={link}
+													>
+														{link}
+													</a>
+												))}
+											</div>
+										)} */}
 								</Card.Body>
 								<Card.Footer className="d-flex flex-column">
 									<CopyLinkButton className="mb-2" link={url} />

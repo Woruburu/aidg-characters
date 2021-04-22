@@ -7,7 +7,7 @@ export interface ICharacter {
 	title?: string;
 	description?: string;
 	tags?: string[];
-	relatedLinks?: string[];
+	relatedPrompts?: string[];
 }
 
 export interface ICharacterProviderState {

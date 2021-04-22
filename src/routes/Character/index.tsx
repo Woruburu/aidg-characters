@@ -112,6 +112,16 @@ const Character = (props: { id: string }) => {
 									</div>
 								)}
 								{character.description && <p>{character.description}</p>}
+								{character.relatedPrompts && character.relatedPrompts.length > 0 && (
+									<div className="mb-4">
+										<h5>Related Prompts</h5>
+										{character.relatedPrompts?.map((link) => (
+											<a className="d-block" target="_blank" href={link}>
+												{link}
+											</a>
+										))}
+									</div>
+								)}
 								<div className="d-flex flex-column flex-sm-row">
 									<CopyLinkButton className="mb-2 mb-sm-0 mr-sm-4" link={url} />
 									<a
