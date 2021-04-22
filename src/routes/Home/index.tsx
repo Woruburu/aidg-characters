@@ -40,7 +40,7 @@ const Home: FunctionComponent<{ search: string }> = (props) => {
 	const [characters, setCharacters] = useState(charactersContext.characters);
 
 	const onSearch = (value: string) => {
-		const searchResults = indexContext.index.search(`*${value}*`);
+		const searchResults = indexContext.index.search(`${value}*`);
 		const refs = searchResults.map((sr) => sr.ref);
 		const filteredCharacters = charactersContext.characters.filter((char) =>
 			char.path ? refs.includes(char.path) : false
@@ -70,7 +70,7 @@ const Home: FunctionComponent<{ search: string }> = (props) => {
 						}
 
 						return (
-							<Card>
+							<Card key={character.path}>
 								<a href={`/characters/${btoa(character.path)}`}>
 									<Card.Img
 										alt={character.title}
