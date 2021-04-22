@@ -67,6 +67,8 @@ module.exports = (env: { production: boolean }): webpack.Configuration => {
 			}),
 			new HtmlWebpackPlugin({
 				publicPath: "/",
+				title: "/aidg/ Characters",
+				favicon: path.resolve(__dirname, "static", "favicon.png"),
 			}),
 			new PreactRefreshPlugin(),
 			new ForkTsCheckerWebpackPlugin({

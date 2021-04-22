@@ -3,7 +3,7 @@ import { CharacterContext } from "ContextProvider/CharacterContextProvider";
 import { LunrIndexContext } from "ContextProvider/LunrIndexProvider";
 import { FunctionComponent } from "preact";
 import { useContext, useEffect, useState } from "preact/hooks";
-import { Badge, Card, CardColumns, Form } from "react-bootstrap";
+import { Badge, Card, CardColumns, Form, SafeAnchor } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
 const Search: FunctionComponent<{ search?: string; onChange: (value: string) => void }> = (
@@ -17,6 +17,14 @@ const Search: FunctionComponent<{ search?: string; onChange: (value: string) => 
 		props.onChange(event.currentTarget.value);
 	};
 
+	useEffect(() => {
+		if (props.search) {
+			setSearchValue(props.search);
+		} else {
+			setSearchValue("");
+		}
+	}, [props.search]);
+
 	return (
 		<Form.Group>
 			<Form.Control value={searchValue} onChange={onChange} placeholder="Search query" />
@@ -24,7 +32,8 @@ const Search: FunctionComponent<{ search?: string; onChange: (value: string) => 
 	);
 };
 
-const Home = () => {
+const Home: FunctionComponent<{ search: string }> = (props) => {
+	console.log(props.search);
 	const charactersContext = useContext(CharacterContext);
 	const indexContext = useContext(LunrIndexContext);
 
@@ -39,18 +48,17 @@ const Home = () => {
 		setCharacters(filteredCharacters);
 	};
 
-	const url = new URL(window.location.href);
-	const searchParams = new URLSearchParams(url.search);
-	const searchQuery = searchParams.get("search");
 	useEffect(() => {
-		if (searchQuery) {
-			onSearch(searchQuery);
+		if (props.search) {
+			onSearch(props.search);
+		} else {
+			onSearch("");
 		}
-	}, []);
+	}, [props.search]);
 
 	return (
 		<Container>
-			<Search search={searchQuery ?? undefined} onChange={onSearch}></Search>
+			<Search search={props.search ?? undefined} onChange={onSearch}></Search>
 			<CardColumns>
 				{characters.map((character) => {
 					if (character.path) {
@@ -79,7 +87,12 @@ const Home = () => {
 										<div tabIndex={0} className="mb-3 card-tags">
 											<strong>Tags: </strong>
 											{character.tags.map((tag) => (
-												<Badge className="mr-1" variant="primary">
+												<Badge
+													as={SafeAnchor}
+													href={`/?search=${tag}`}
+													className="mr-1"
+													variant="primary"
+												>
 													{tag}
 												</Badge>
 											))}

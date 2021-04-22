@@ -11,7 +11,7 @@ const App = () => {
 			<AppNavbar />
 			<Router>
 				<AsyncRoute
-					path="/:search?"
+					path="/"
 					getComponent={async () => {
 						const module = await import("./routes/Home");
 						return module.default;
