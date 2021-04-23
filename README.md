@@ -25,6 +25,8 @@ We'd love to have you contribute your cards to the Character Repository! To cont
 
 3. Update `characters/_manifest.json` with an entry for each added card.
 
+Add your characters to the top of the manifest, right under the `"characters":[` line.
+
 Each new entry should have the following fields. The `path` field is a relative path to your image. For images in the `characters` folder, this is just the file name. The `title` field is the character's name, as it will appear on the Character Repository. The `tags` field is an array of tags for the character. These will be searchable through the app. The `relatedPrompts` is to list prompts related to the character.
 
 ```
