@@ -1,17 +1,60 @@
 {
     "characters":[
         {
+            "path": "FairymonAIDcard.png",
+            "title": "Fairymon",
+            "description": "This fairy digimon will carelessly charm you and shamelessly bang you afterwards.",
+            "tags": ["digimon", "fairy", "lingerie"],
+            "relatedPrompts": ["https://prompts.aidg.club/1178"]
+        },
+        {
+            "path": "RanamonAIDcard.png",
+            "title": "Ranamon",
+            "description": "This bratty digimon will get on your nerves but she'll eagerly service you afterwards.",
+            "tags": ["digimon", "fish-girl"],
+            "relatedPrompts": ["https://prompts.aidg.club/1178"]
+        },
+        {
             "path": "lilimon.png",
             "title": "Lilimon",
             "description": "This fairy Digimon will sweeten your mood and do whimsical things to you afterwards.",
-            "tags": ["digimon"],
+            "tags": ["digimon", "fairy", "flower"],
             "relatedPrompts": ["https://prompts.aidg.club/1178"]
+        },
+        {
+            "path": "BastemonAIDcard.png",
+            "title": "Bastemon",
+            "description": "This feral digimon will charm your heart and ruthlessly mate with you afterwards.",
+            "tags": ["digimon", "cat-girl"],
+            "relatedPrompts": ["https://prompts.aidg.club/1178"]
+        },
+        {
+            "path": "LadyDevimonAIDcard.png",
+            "title": "LadyDevimon",
+            "description": "This unholy digimon will taint your mind and fuck the hell out of 	you   afterwards.",
+            "tags": ["digimon", "demon"],
+            "relatedPrompts": ["https://prompts.aidg.club/1178", "https://prompts.aidg.club/1059"]
+        },
+        {
+            "path": "AngewomonAIDcard.png",
+            "title": "Angewomon",
+            "description": "This holy digimon will purify your soul and make sweet love with you afterwards.",
+            "tags": ["digimon", "angel"],
+            "relatedPrompts": ["https://prompts.aidg.club/1178", "https://prompts.aidg.club/1059"]
         },
         {
             "path": "pironica.png",
             "title": "Pironica",
+            "tags": ["brazil", "brown skin", "big ass", "genderbend"],
             "description": "Unlike Pirone, this funky babe is always cheery and ready to have some fun.",
             "relatedPrompts": ["https://prompts.aidg.club/1139"]
+        },
+        {
+            "path": "KuruminhaAIDcard.png",
+            "title": "Kuruminha",
+            "tags": ["brazil", "brown skin", "flat chest"],
+            "description": "This young girl native to the untamed new world of brazil is very playful and excited to try new experiences!",
+            "relatedPrompts": ["https://prompts.aidg.club/1139", "https://prompts.aidg.club/806", "https://prompts.aidg.club/129"]
         },
         {
             "path": "Demy.png",
