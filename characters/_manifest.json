@@ -57,17 +57,31 @@
             "relatedPrompts": ["https://prompts.aidg.club/1139", "https://prompts.aidg.club/806", "https://prompts.aidg.club/129"]
         },
         {
-            "path": "Demy.png",
-            "title": "Demy",
-            "tags": ["girlfriend", "mitosis", "clones", "intimacy"],
-            "description": "This loving girlfriend with the power of \"mitosis\". Demy can split herself into multiple, identical copies.",
-            "relatedPrompts": ["https://prompts.aidg.club/1139"]
-        },
-        {
             "path": "Purple-Heart.png",
             "title": "Purple Heart",
             "tags":["neptunia"],
             "description": "This goddess is powered up and ready to do what Nintendoesn't.",
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
+        },
+        {
+            "path": "Blanc.png",
+            "title": "Blanc",
+            "tags":["neptunia"],
+            "description": "Start a revolution in this apathetic goddess's heart!",
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
+        },
+        {
+            "path": "Historie.png",
+            "title": "Historie",
+            "tags":["neptunia"],
+            "description": "Can you keep an eye on this fary for a minute?",
+            "relatedPrompts": ["https://prompts.aidg.club/1139"]
+        },
+        {
+            "path": "Demy.png",
+            "title": "Demy",
+            "tags": ["girlfriend", "mitosis", "clones", "intimacy"],
+            "description": "This loving girlfriend with the power of \"mitosis\". Demy can split herself into multiple, identical copies.",
             "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
