@@ -9,6 +9,26 @@ import { Badge, Col, Container, Image, Row, Tab, Tabs } from "react-bootstrap";
 const DecodedValues: FunctionComponent<{ characterUrl: URL }> = (props) => {
 	const [characterData, setCharacterData] = useState("");
 
+	const isValidMetadata = (decodedCharacter: any) => {
+		if (decodedCharacter.type === 'IB1') {
+			return decodedCharacter.name
+				&& decodedCharacter.physicalDescription
+				&& decodedCharacter.mentalDescription
+				&& decodedCharacter.dialogExamples
+		}
+		else if (decodedCharacter.type === 'RAW') {
+			return decodedCharacter.name
+				&& decodedCharacter.rawCharacter
+		}
+		else { // Assume IB0
+			return decodedCharacter.name
+				&& decodedCharacter.physicalDescription
+				&& decodedCharacter.mentalDescription
+				&& decodedCharacter.dialogExamples
+				&& decodedCharacter.customAN
+		}
+	}
+
 	const parseExifr = async () => {
 		const response = await fetch(props.characterUrl.toString());
 		if (response.ok) {
@@ -35,14 +55,7 @@ const DecodedValues: FunctionComponent<{ characterUrl: URL }> = (props) => {
 			// Do some basic validation. Make sure the character can be decoded and has
 			// the expected fields
 			let decodedCharacter = JSON.parse(window.atob(encodedCharacter));
-			if (
-				!decodedCharacter ||
-				!decodedCharacter.name ||
-				!decodedCharacter.physicalDescription ||
-				!decodedCharacter.mentalDescription ||
-				!decodedCharacter.dialogExamples ||
-				!decodedCharacter.customAN
-			) {
+			if (!isValidMetadata(decodedCharacter)) {
 				return;
 			}
 
