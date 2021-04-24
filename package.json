@@ -16,16 +16,18 @@
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.13.0",
     "@babel/runtime": "^7.13.10",
-    "@prefresh/webpack": "^3.2.0",
     "@prefresh/babel-plugin": "^0.4.1",
+    "@prefresh/webpack": "^3.2.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/preact": "^2.0.1",
     "@types/copy-webpack-plugin": "^6.4.1",
     "@types/html-webpack-plugin": "^3.2.4",
     "@types/jest": "^26.0.22",
+    "@types/lunr": "^2.3.3",
     "@types/mini-css-extract-plugin": "^1.2.2",
     "@types/react-bootstrap": "^0.32.25",
+    "@types/react-syntax-highlighter": "^13.5.0",
     "@types/testing-library__jest-dom": "^5.9.5",
     "@types/webpack": "^4.41.27",
     "@types/webpack-dev-server": "^3.11.2",
@@ -53,13 +55,13 @@
   },
   "dependencies": {
     "@forevolve/bootstrap-dark": "^1.0.0",
-    "@types/lunr": "^2.3.3",
     "core-js": "^3.10.1",
     "exifr": "^6.2.0",
     "lunr": "^2.3.9",
     "preact": "^10.5.13",
     "preact-async-route": "^2.2.1",
     "preact-router": "^3.2.1",
-    "react-bootstrap": "^1.5.2"
+    "react-bootstrap": "^1.5.2",
+    "react-syntax-highlighter": "^15.4.3"
   }
 }

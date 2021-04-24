@@ -1,33 +1,18 @@
 import CopyLinkButton from "components/CopyLinkButton";
+import Loading from "components/Loading";
 import NotFound from "components/NotFound";
 import { CharacterContext } from "ContextProvider/CharacterContextProvider";
 import { parse } from "exifr";
 import { FunctionComponent } from "preact";
 import { useContext, useEffect, useState } from "preact/hooks";
-import { Badge, Col, Container, Image, Row, Tab, Tabs } from "react-bootstrap";
+import { Alert, Badge, Col, Container, Image, Row, Tab, Tabs } from "react-bootstrap";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { dark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { b64DecodeUnicode } from "utils/utf8";
 
 const DecodedValues: FunctionComponent<{ characterUrl: URL }> = (props) => {
 	const [characterData, setCharacterData] = useState("");
-
-	const isValidMetadata = (decodedCharacter: any) => {
-		if (decodedCharacter.type === 'IB1') {
-			return decodedCharacter.name
-				&& decodedCharacter.physicalDescription
-				&& decodedCharacter.mentalDescription
-				&& decodedCharacter.dialogExamples
-		}
-		else if (decodedCharacter.type === 'RAW') {
-			return decodedCharacter.name
-				&& decodedCharacter.rawCharacter
-		}
-		else { // Assume IB0
-			return decodedCharacter.name
-				&& decodedCharacter.physicalDescription
-				&& decodedCharacter.mentalDescription
-				&& decodedCharacter.dialogExamples
-				&& decodedCharacter.customAN
-		}
-	}
+	const [error, setError] = useState<null | string>(null);
 
 	const parseExifr = async () => {
 		const response = await fetch(props.characterUrl.toString());
@@ -49,17 +34,17 @@ const DecodedValues: FunctionComponent<{ characterUrl: URL }> = (props) => {
 			}
 
 			if (!encodedCharacter) {
+				setError("Could not find any embedded data");
 				return;
 			}
 
-			// Do some basic validation. Make sure the character can be decoded and has
-			// the expected fields
-			let decodedCharacter = JSON.parse(window.atob(encodedCharacter));
-			if (!isValidMetadata(decodedCharacter)) {
+			try {
+				let decodedCharacter = JSON.parse(b64DecodeUnicode(encodedCharacter));
+				setCharacterData(JSON.stringify(decodedCharacter, null, "\t"));
+			} catch (e) {
+				setError(e.toString());
 				return;
 			}
-
-			setCharacterData(JSON.stringify(decodedCharacter, null, "\t"));
 		}
 	};
 
@@ -67,11 +52,28 @@ const DecodedValues: FunctionComponent<{ characterUrl: URL }> = (props) => {
 		parseExifr();
 	}, []);
 
-	return (
-		<pre className="mt-3">
-			<code>{characterData}</code>
-		</pre>
-	);
+	if (error) {
+		return (
+			<Alert className="mt-3" variant="danger">
+				{error}
+			</Alert>
+		);
+	}
+
+	if (characterData) {
+		return (
+			<SyntaxHighlighter
+				className="mt-3 bg-dark"
+				customStyle={{ backgroundColor: "none" }}
+				language="json"
+				style={dark}
+			>
+				{characterData}
+			</SyntaxHighlighter>
+		);
+	}
+
+	return <Loading />;
 };
 
 const Character = (props: { id: string }) => {
