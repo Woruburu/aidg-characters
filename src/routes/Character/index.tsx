@@ -2,80 +2,11 @@ import CopyLinkButton from "components/CopyLinkButton";
 import Loading from "components/Loading";
 import NotFound from "components/NotFound";
 import { CharacterContext } from "ContextProvider/CharacterContextProvider";
-import { parse } from "exifr";
-import { FunctionComponent } from "preact";
-import { useContext, useEffect, useState } from "preact/hooks";
-import { Alert, Badge, Col, Container, Image, Row, Tab, Tabs } from "react-bootstrap";
-import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
-import dark from "react-syntax-highlighter/dist/esm/styles/prism/dracula";
-import { b64DecodeUnicode } from "utils/utf8";
+import { lazy, Suspense } from "preact/compat";
+import { useContext } from "preact/hooks";
+import { Badge, Col, Container, Image, Row, Tab, Tabs } from "react-bootstrap";
 
-const DecodedValues: FunctionComponent<{ characterUrl: URL }> = (props) => {
-	SyntaxHighlighter.registerLanguage("json", json);
-
-	const [characterData, setCharacterData] = useState("");
-	const [error, setError] = useState<null | string>(null);
-
-	const parseExifr = async () => {
-		const response = await fetch(props.characterUrl.toString());
-		if (response.ok) {
-			const blob = await response.blob();
-			//@ts-ignore
-			const exif = await parse(blob, true);
-
-			let encodedCharacter;
-			if (exif.ImageDescription) {
-				// JPG image
-				encodedCharacter = exif.ImageDescription.trim();
-			} else if (
-				// PNG image
-				exif.description &&
-				exif.description.value
-			) {
-				encodedCharacter = exif.description.value.trim();
-			}
-
-			if (!encodedCharacter) {
-				setError("Could not find any embedded data");
-				return;
-			}
-
-			try {
-				let decodedCharacter = JSON.parse(b64DecodeUnicode(encodedCharacter));
-				setCharacterData(JSON.stringify(decodedCharacter, null, "\t"));
-			} catch (e) {
-				setError(e.toString());
-				return;
-			}
-		}
-	};
-
-	useEffect(() => {
-		parseExifr();
-	}, []);
-
-	if (error) {
-		return (
-			<Alert className="mt-3" variant="danger">
-				{error}
-			</Alert>
-		);
-	}
-
-	if (characterData) {
-		return (
-			<SyntaxHighlighter className="mt-3" language="json" style={dark}>
-				{characterData}
-			</SyntaxHighlighter>
-			// <pre className="mt-3">
-			// 	<code>{characterData}</code>
-			// </pre>
-		);
-	}
-
-	return <Loading />;
-};
+const DecodeValues = lazy(() => import("components/DecodeValues"));
 
 const Character = (props: { id: string }) => {
 	const state = useContext(CharacterContext);
@@ -153,7 +84,15 @@ const Character = (props: { id: string }) => {
 					</Row>
 				</Tab>
 				<Tab eventKey="decode" title="Decoded Values">
-					<DecodedValues characterUrl={url} />
+					<Suspense
+						fallback={
+							<div className="mt-3">
+								<Loading />
+							</div>
+						}
+					>
+						<DecodeValues characterUrl={url} />
+					</Suspense>
 				</Tab>
 			</Tabs>
 		</Container>

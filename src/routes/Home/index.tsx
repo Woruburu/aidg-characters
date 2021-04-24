@@ -99,7 +99,6 @@ const Search: FunctionComponent<{ search?: string; onChange: (value: string) => 
 };
 
 const Home: FunctionComponent<{ search: string }> = (props) => {
-	console.log(props.search);
 	const charactersContext = useContext(CharacterContext);
 	const indexContext = useContext(LunrIndexContext);
 
