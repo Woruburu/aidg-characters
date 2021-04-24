@@ -6,11 +6,14 @@ import { parse } from "exifr";
 import { FunctionComponent } from "preact";
 import { useContext, useEffect, useState } from "preact/hooks";
 import { Alert, Badge, Col, Container, Image, Row, Tab, Tabs } from "react-bootstrap";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { dark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
+import dark from "react-syntax-highlighter/dist/esm/styles/prism/dracula";
 import { b64DecodeUnicode } from "utils/utf8";
 
 const DecodedValues: FunctionComponent<{ characterUrl: URL }> = (props) => {
+	SyntaxHighlighter.registerLanguage("json", json);
+
 	const [characterData, setCharacterData] = useState("");
 	const [error, setError] = useState<null | string>(null);
 
@@ -62,14 +65,12 @@ const DecodedValues: FunctionComponent<{ characterUrl: URL }> = (props) => {
 
 	if (characterData) {
 		return (
-			<SyntaxHighlighter
-				className="mt-3 bg-dark"
-				customStyle={{ backgroundColor: "none" }}
-				language="json"
-				style={dark}
-			>
+			<SyntaxHighlighter className="mt-3" language="json" style={dark}>
 				{characterData}
 			</SyntaxHighlighter>
+			// <pre className="mt-3">
+			// 	<code>{characterData}</code>
+			// </pre>
 		);
 	}
 
