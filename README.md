@@ -1,20 +1,5 @@
-# Install Dependencies
+# Contributing Cards
 
-`npm i`
-
-# Run Local Dev Server
-
-`npm run serve`
-
-# Run Tests
-
-`npm run test`
-
-# Build for Production
-
-`npm run build`
-
-# Contributing
 We'd love to have you contribute your cards to the Character Repository! To contribute your cards, follow the steps below:
 
 1. Make a fork of the `aidg-characters` repo by clicking the `Fork` button in the upper-right corner of the page.
@@ -49,3 +34,20 @@ To test that the server builds and runs, you will need to have `node.js` and `np
 
 ![Pull Request](readme-img/pullRequest.png)
 
+# Developing
+
+## Install Dependencies
+
+`npm i`
+
+## Run Local Dev Server
+
+`npm run serve`
+
+## Run Tests
+
+`npm run test`
+
+## Build for Production
+
+`npm run build`
