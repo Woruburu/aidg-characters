@@ -78,6 +78,13 @@
             "relatedPrompts": ["https://prompts.aidg.club/1139"]
         },
         {
+            "path": "Mercedes.png",
+            "title": "Mercedes",
+            "tags": ["brown", "tomboy", "combatant", "sword and shield"],
+            "description": "Spitfire Duelist - This fiesty swordswoman will cut down anyone in her way. Step aside!",
+            "relatedPrompts": ["https://prompts.aidg.club/1139", "https://prompts.aidg.club/1206"]
+        },
+        {
             "path": "Demy.png",
             "title": "Demy",
             "tags": ["girlfriend", "mitosis", "clones", "intimacy"],
