@@ -1,3 +1,5 @@
+This is the source code for https://characters.aidg.club/
+
 # Contributing Cards
 
 We'd love to have you contribute your cards to the Character Repository! To contribute your cards, follow the steps below:
@@ -33,6 +35,8 @@ To test that the server builds and runs, you will need to have `node.js` and `np
 5. Create a pull request back to the original `aidg-characters` repo. This will get merged in and your characters will be live on the Character Repository!
 
 ![Pull Request](readme-img/pullRequest.png)
+
+---
 
 # Developing
 

@@ -4,7 +4,7 @@ import NotFound from "components/NotFound";
 import { CharacterContext } from "ContextProvider/CharacterContextProvider";
 import { lazy, Suspense } from "preact/compat";
 import { useContext } from "preact/hooks";
-import { Badge, Col, Container, Image, Row, Tab, Tabs } from "react-bootstrap";
+import { Badge, Col, Container, Image, Row, SafeAnchor, Tab, Tabs } from "react-bootstrap";
 
 const DecodeValues = lazy(() => import("components/DecodeValues"));
 
@@ -52,7 +52,12 @@ const Character = (props: { id: string }) => {
 									<div tabIndex={0} className="mb-3 card-tags">
 										<strong>Tags: </strong>
 										{character.tags.map((tag) => (
-											<Badge className="mr-1" variant="primary">
+											<Badge
+												className="mr-1"
+												variant="primary"
+												as={SafeAnchor}
+												href={`/?search=${tag}`}
+											>
 												{tag}
 											</Badge>
 										))}
