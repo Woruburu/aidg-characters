@@ -1,6 +1,13 @@
 {
     "characters":[
         {
+            "path": "PortiaDuvall.png",
+            "title": "Portia Duvall",
+            "description": "Stubborn and naive. This mine owner decides to hold on to her inheritance and offers a ... unique solution to pay off her deceased father's debt.",
+            "tags": ["western", "wild west", "naive", "modest", "shy", "stubborn", "pigtails"],
+            "relatedPrompts": ["https://prompts.aidg.club/960"]
+        },
+        {
             "path": "FairymonAIDcard.png",
             "title": "Fairymon",
             "description": "This fairy digimon will carelessly charm you and shamelessly bang you afterwards.",
