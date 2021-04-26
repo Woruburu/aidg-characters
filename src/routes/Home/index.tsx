@@ -1,4 +1,4 @@
-import CopyLinkButton from "components/CopyLinkButton";
+import CopyButton from "components/CopyLinkButton";
 import { CharacterContext } from "ContextProvider/CharacterContextProvider";
 import { LunrIndexContext } from "ContextProvider/LunrIndexProvider";
 import { FunctionComponent } from "preact";
@@ -189,7 +189,7 @@ const Home: FunctionComponent<{ search: string }> = (props) => {
 										)} */}
 									</Card.Body>
 									<Card.Footer className="d-flex flex-column">
-										<CopyLinkButton className="mb-2" link={url} />
+										<CopyButton className="mb-2" link={url.toString()} />
 										<a
 											download
 											className="btn btn-outline-secondary"

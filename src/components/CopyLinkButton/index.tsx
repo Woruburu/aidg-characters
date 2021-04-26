@@ -2,10 +2,17 @@ import { FunctionComponent } from "preact";
 import { useState } from "preact/hooks";
 import { Button } from "react-bootstrap";
 
-const CopyLinkButton: FunctionComponent<{ className?: string; link: URL }> = (props) => {
+const CopyButton: FunctionComponent<{
+	className?: string;
+	link: string;
+	variantNormal?: string;
+	variantClick?: string;
+	textNormal?: string;
+	textClick?: string;
+}> = (props) => {
 	const [showCopiedText, setShowCopiedText] = useState(false);
 	const onClick = async () => {
-		await navigator.clipboard.writeText(props.link.toString());
+		await navigator.clipboard.writeText(props.link);
 		setShowCopiedText(true);
 		setTimeout(() => {
 			setShowCopiedText(false);
@@ -16,12 +23,16 @@ const CopyLinkButton: FunctionComponent<{ className?: string; link: URL }> = (pr
 		<Button
 			disabled={showCopiedText}
 			className={props.className}
-			variant={showCopiedText ? "outline-success" : "success"}
+			variant={
+				showCopiedText
+					? props.variantClick ?? "outline-success"
+					: props.variantNormal ?? "success"
+			}
 			onClick={onClick}
 		>
-			{showCopiedText ? "Copied!" : "Copy Link"}
+			{showCopiedText ? props.textClick ?? "Copied!" : props.textNormal ?? "Copy Link"}
 		</Button>
 	);
 };
 
-export default CopyLinkButton;
+export default CopyButton;

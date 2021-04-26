@@ -1,14 +1,19 @@
-import CopyLinkButton from "components/CopyLinkButton";
+import CopyButton from "components/CopyLinkButton";
 import Loading from "components/Loading";
+import ManualLoad from "components/ManualLoad";
 import NotFound from "components/NotFound";
 import { CharacterContext } from "ContextProvider/CharacterContextProvider";
 import { lazy, Suspense } from "preact/compat";
-import { useContext } from "preact/hooks";
+import { useContext, useEffect, useState } from "preact/hooks";
 import { Badge, Col, Container, Image, Row, SafeAnchor, Tab, Tabs } from "react-bootstrap";
+import characterLoad from "utils/exif";
 
 const DecodeValues = lazy(() => import("components/DecodeValues"));
 
 const Character = (props: { id: string }) => {
+	const [characterBase64, setCharacterBase64] = useState("");
+	const [error, setError] = useState<undefined | string>(undefined);
+
 	const state = useContext(CharacterContext);
 
 	let path = "";
@@ -18,11 +23,7 @@ const Character = (props: { id: string }) => {
 		return <NotFound />;
 	}
 	const character = state.characters.find((e) => e.path === path);
-	if (!character) {
-		return <NotFound />;
-	}
-
-	if (!character.path) {
+	if (!character || !character.path) {
 		return <NotFound />;
 	}
 
@@ -33,6 +34,23 @@ const Character = (props: { id: string }) => {
 		url = new URL(`/characters/${character.path}`, window.location.href);
 	}
 
+	const getBase64 = async () => {
+		const response = await fetch(url.toString());
+		if (response.ok) {
+			try {
+				const blob = await response.blob();
+				setCharacterBase64(await characterLoad.getBase64(blob));
+			} catch (e) {
+				setError(e.toString());
+				return;
+			}
+		}
+	};
+
+	useEffect(() => {
+		getBase64();
+	}, []);
+
 	return (
 		<Container>
 			<Tabs defaultActiveKey="profile">
@@ -40,12 +58,12 @@ const Character = (props: { id: string }) => {
 					<Row>
 						<Col sm={6} md={4} xl={3} className="d-flex">
 							<Image
-								className="mx-auto mt-4"
+								className="mx-auto mb-auto mt-4"
 								alt={character.title}
 								src={url.toString()}
 							/>
 						</Col>
-						<Col>
+						<Col sm={6} md={8} xl={9}>
 							<div className="mt-3">
 								<h1>{character.title}</h1>
 								{character.tags && (
@@ -74,8 +92,44 @@ const Character = (props: { id: string }) => {
 										))}
 									</div>
 								)}
+								<div className="mb-4">
+									<h5>Usage</h5>
+									<p>
+										Requires you to be running a script that supports loading
+										characters
+										{character.relatedPrompts &&
+										character.relatedPrompts.length > 0 ? (
+											<span>
+												. See <strong>Related Prompts</strong> above, or use
+												one{" "}
+											</span>
+										) : (
+											<span>, </span>
+										)}
+										such as{" "}
+										<a
+											rel="nofollow noreferrer"
+											href="https://prompts.aidg.club/1141"
+											target="_blank"
+										>
+											Infinity Brothel
+										</a>
+										. Images and links can be loaded with the{" "}
+										<a
+											href="https://github.com/CoomersGuide/CoomersGuide.github.io/raw/main/Tools/scripts/aidg.character.injector.user.js"
+											target="_blank"
+											rel="nofollow noreferrer"
+										>
+											userscript
+										</a>
+										, or you can load the character manually.
+									</p>
+								</div>
 								<div className="d-flex flex-column flex-sm-row">
-									<CopyLinkButton className="mb-2 mb-sm-0 mr-sm-4" link={url} />
+									<CopyButton
+										className="mb-2 mb-sm-0 mr-sm-4"
+										link={url.toString()}
+									/>
 									<a
 										download
 										className="btn btn-outline-secondary"
@@ -84,6 +138,11 @@ const Character = (props: { id: string }) => {
 										Download
 									</a>
 								</div>
+								<ManualLoad
+									className="my-4"
+									error={error}
+									base64={characterBase64}
+								/>
 							</div>
 						</Col>
 					</Row>
@@ -96,7 +155,7 @@ const Character = (props: { id: string }) => {
 							</div>
 						}
 					>
-						<DecodeValues characterUrl={url} />
+						<DecodeValues characterUrl={url} title={character.title ?? ""} />
 					</Suspense>
 				</Tab>
 			</Tabs>

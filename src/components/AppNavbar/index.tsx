@@ -13,7 +13,7 @@ const AppNavbar = () => {
 							target="_blank"
 							href="https://github.com/CoomersGuide/CoomersGuide.github.io/raw/main/Tools/scripts/aidg.character.injector.user.js"
 						>
-							Usercript
+							Userscript
 						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>

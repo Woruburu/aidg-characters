@@ -22,4 +22,4 @@ function b64DecodeUnicode(str: string) {
 	);
 }
 
-export { b64EncodeUnicode, b64DecodeUnicode };
+export default { b64EncodeUnicode, b64DecodeUnicode };
