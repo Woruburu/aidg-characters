@@ -1,21 +1,52 @@
 import CopyButton from "components/CopyLinkButton";
+import ManualLoad from "components/ManualLoad";
 import { CharacterContext } from "ContextProvider/CharacterContextProvider";
 import { LunrIndexContext } from "ContextProvider/LunrIndexProvider";
 import { FunctionComponent } from "preact";
 import { useContext, useEffect, useState } from "preact/hooks";
 import { Badge, Button, Card, Col, Form, Modal, Row, SafeAnchor } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
+import exif from "utils/exif";
 
 const Search: FunctionComponent<{ search?: string; onChange: (value: string) => void }> = (
 	props
 ) => {
 	const [searchValue, setSearchValue] = useState(props.search ?? "");
 	const [showAdvancedModal, setshowAdvancedModal] = useState(false);
+	const [showRandomModal, setShowRandomModal] = useState(false);
+	const [randomBase64, setRandomBase64] = useState<string>("");
+	const [randomError, setRandomError] = useState<string | undefined>(undefined);
+	const charactersContext = useContext(CharacterContext);
 
 	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.currentTarget.value;
 		setSearchValue(value);
 		props.onChange(event.currentTarget.value);
+	};
+
+	const imFeelingLucky = async () => {
+		setShowRandomModal(true);
+		const randomCharacter =
+			charactersContext.characters[
+				Math.floor(Math.random() * charactersContext.characters.length)
+			];
+		if (!randomCharacter || !randomCharacter.path) {
+			setRandomError("Character does not have a valid image path");
+			return;
+		}
+		let url: URL;
+		try {
+			url = new URL(randomCharacter.path);
+		} catch {
+			url = new URL(`/characters/${randomCharacter.path}`, window.location.href);
+		}
+		const response = await fetch(url.toString());
+		if (!response.ok) {
+			setRandomError("Could not get character image");
+			return;
+		}
+		const blob = await response.blob();
+		setRandomBase64(await exif.getBase64(blob));
 	};
 
 	useEffect(() => {
@@ -31,6 +62,9 @@ const Search: FunctionComponent<{ search?: string; onChange: (value: string) => 
 			<Form.Group>
 				<Form.Control value={searchValue} onChange={onChange} placeholder="Search query" />
 				<div className="d-flex">
+					<Button className="mt-2" size="sm" variant="warning" onClick={imFeelingLucky}>
+						I'm feeling lucky
+					</Button>
 					<Form.Text className="ml-auto" muted>
 						<Button
 							size="sm"
@@ -44,6 +78,33 @@ const Search: FunctionComponent<{ search?: string; onChange: (value: string) => 
 					</Form.Text>
 				</div>
 			</Form.Group>
+			<Modal
+				show={showRandomModal}
+				onHide={() => {
+					setShowRandomModal(false);
+				}}
+				onExited={() => {
+					setRandomBase64("");
+					setRandomError(undefined);
+				}}
+			>
+				<Modal.Header closeButton>
+					<Modal.Title>Do you feel lucky?</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<ManualLoad base64={randomBase64} error={randomError}></ManualLoad>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button
+						variant="secondary"
+						onClick={() => {
+							setShowRandomModal(false);
+						}}
+					>
+						Close
+					</Button>
+				</Modal.Footer>
+			</Modal>
 			<Modal size="lg" show={showAdvancedModal} onHide={() => setshowAdvancedModal(false)}>
 				<Modal.Header closeButton>
 					<Modal.Title>Searching</Modal.Title>
